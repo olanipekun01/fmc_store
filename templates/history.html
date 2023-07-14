@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+
+    <link href="{% static './css/history.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <h1>Store Management App</h1>
+        <span>logged in</span>
+    </header>
+    <main>
+        <!-- <section class="side_nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">dept 1</a></li>
+                <li><a href="#">dept 2</a></li>
+                <li><a href="#">dept 3</a></li>
+                <li><a href="#">dept 4</a></li>
+            </ul>
+        </section> -->
+
+        <section class="hero">
+            <a href="/dept/{{active_dept}}">back</a>
+
+            <!-- <div class="dept_nav">
+                <a href="/"><span>Home</span></a>
+                <a href="/dept1"><span class="active">dept 1</span></a>
+                <a href="/dept2"><span>dept 2</span></a>
+                <a href="/dept3"><span>dept 3</span></a>
+                <a href="/dept4"><span>dept 4</span></a>
+            </div> -->
+
+            <div class="card_wrapper">
+
+                <div class="header_div">
+                    <h3>History</h3>
+                </div>
+
+                <div class="items_wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Item</th>
+                                <th>Amount</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for hist in page_obj.object_list %}
+                                <tr>
+                                    <td>{{hist.date_created}}</td>
+                                    <td>{{hist.item_name}}</td>
+                                    <td>{{hist.amount}}</td>
+                                    <td>{{hist.bal}}</td>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+
+                       
+                    </table>
+                    <center>
+                        {%if page_obj.has_previous %} 
+                        <!--whether the previous page exists-->
+                            <a href="?page={{page_obj.previous_page_number}}">Prev</a>
+                        {% endif %}
+                            <span>{{page_obj.number}}</span>
+            
+                        {%if page_obj.has_next %}
+                            <a href="?page={{page_obj.next_page_number}}">Next</a>
+                        {% endif %}
+                    </center>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <Span>Forklift &copy2023</Span>
+    </footer>
+
+    <!-- <div class="background_wrapper">
+
+    </div>
+
+    <div class="modal_container">
+        <form method="post" action="dept1">
+            {% csrf_token %}
+            <input id="modalNameInput" type="text" name="input_name" value="Paracetamol">
+            <input type="number" name="input_amount" placeholder="amount">
+            <select name="op_type" id="">
+                <option value="add">add</option>
+                <option value="subtract">subtract</option>
+            </select>
+            <button>submit</button>
+        </form>
+        <button id="cancelBtn" class="cancel_btn" onclick="closeModal()">cancel</button>
+    </div>
+
+    <div class="new_stock">
+        <form method="post" action="newstock">
+            {% csrf_token %}
+            <input id="modalNameInput" type="text" name="item_name" placeholder="Item name">
+            <input type="number" name="item_amount" placeholder="amount">
+            <select name="dept" id="">
+                <option value="dept1">dept1</option>
+            </select>
+            <button>submit</button>
+        </form>
+        <button id="cancelNewStock" class="cancel_btn" onclick="closeNewStockModal()">cancel</button>
+    </div> -->
+    <script src="{% static './js/history.js' %}"></script>
+</body>
+
+</html>

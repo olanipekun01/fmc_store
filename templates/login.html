@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="{% static './css/login.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Store Management App</h1>
+        <span>login</span>
+    </header>
+    <main>
+        <form method="post" action="login">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input placeholder="username" name="username" type="text">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="">
+            <button>submit</button>
+        </form>
+        
+    </main>
+
+    <footer>
+        <Span>Forklift &copy2023</Span>
+    </footer>
+
+
+</body>
+
+</html>

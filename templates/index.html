@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="{% static './css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Store Management App</h1>
+        {% if user.is_authenticated %}
+        <span><a href="{% url 'store:logout' %}">logout</a></span>
+        {% else %}
+        <span><a href="{% url 'store:login' %}">login</a></span>
+        {% endif %}
+    </header>
+    <main>
+        <!-- <section class="side_nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">dept 1</a></li>
+                <li><a href="#">dept 2</a></li>
+                <li><a href="#">dept 3</a></li>
+                <li><a href="#">dept 4</a></li>
+            </ul>
+        </section> -->
+
+        <section class="hero">
+
+
+            <div class="dept_nav">
+                <a href="/"><span class="active1">Home</span></a>
+                {% for dept in dept %}
+                    <a href="/dept/{{dept.dept_name}}"><span>{{dept.dept_name}}</span></a>
+                {% endfor %}
+            </div>
+
+            <div class="card_wrapper">
+
+                {% for dept in dept %}
+                    <div class="card">
+                        <p>{{dept.dept_name}}</p>
+                        <span>No of items: <i>{{dept1}}</i></span>
+                    </div>
+                {% endfor %}
+
+                <div class="card">
+                    <p>Microbiology / Parasitology</p>
+                    <span>No of items: <i>{{dept1}}</i></span>
+                </div>
+
+                <div class="card">
+                    <p>Haematology / Seratology</p>
+                    <span>No of items: <i>{{dept2}}</i></span>
+                </div>
+
+                <div class="card">
+                    <p>Chemical Pathology</p>
+                    <span>No of items: <i>{{dept3}}</i></span>
+                </div>
+
+                <div class="card">
+                    <p>Histopathology</p>
+                    <span>No of items: <i>{{dept4}}</i></span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <Span>Forklift &copy2023</Span>
+    </footer>
+
+    
+</body>
+
+</html>
