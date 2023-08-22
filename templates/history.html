@@ -13,8 +13,15 @@
 
 <body>
     <header>
-        <h1>Store Management App</h1>
-        <span>logged in</span>
+        <a href="{% url 'store:index' %}" class="header_wrapper">
+            <img src="{% static './assets/fmc_owo_logo.jpg' %}" alt="">
+            <h1>FMC OWO STORE</h1>
+        </a>
+        {% if user.is_authenticated %}
+        <span class="logout"><a href="{% url 'store:logout' %}">logout</a></span>
+        {% else %}
+        <span class="login"><a href="{% url 'store:login' %}">login</a></span>
+        {% endif %}
     </header>
     <main>
         <!-- <section class="side_nav">
@@ -28,20 +35,28 @@
         </section> -->
 
         <section class="hero">
-            <a href="/dept/{{active_dept}}">back</a>
+            <!-- <a href="/dept">back</a> -->
 
-            <!-- <div class="dept_nav">
-                <a href="/"><span>Home</span></a>
-                <a href="/dept1"><span class="active">dept 1</span></a>
-                <a href="/dept2"><span>dept 2</span></a>
-                <a href="/dept3"><span>dept 3</span></a>
-                <a href="/dept4"><span>dept 4</span></a>
-            </div> -->
+            <div class="dept_nav">
+                <a href="/"><span class="active1">Home</span></a>
+                
+            </div>
 
             <div class="card_wrapper">
 
                 <div class="header_div">
                     <h3>History</h3>
+
+                    <div class="wrapper">
+                        <img onclick="showFilterModal()" src="{% static './assets/filterIcon.svg' %}""" alt="">
+                        
+                        <!-- <a href="/csv_download">Download CSV</a> -->
+                        <form method="post" action="/history">
+                            {% csrf_token %}
+                        
+                            <button type="submit">Download CSV</button>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="items_wrapper">
@@ -51,6 +66,11 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Item</th>
+                                <th>Voucher no</th>
+                                <th>Action</th>
+                                <th>Description</th>
+                                <th>Unit issue</th>
+                                <th>Unit Rate</th>
                                 <th>Amount</th>
                                 <th>Balance</th>
                             </tr>
@@ -59,8 +79,13 @@
                         <tbody>
                             {% for hist in page_obj.object_list %}
                                 <tr>
-                                    <td>{{hist.date_created}}</td>
+                                    <td>{{hist.dateCreated}}</td>
                                     <td>{{hist.item_name}}</td>
+                                    <td>{{hist.voucher_no}}</td>
+                                    <td>{{hist.action}}</td>
+                                    <td>{{hist.description}}</td>
+                                    <td>{{hist.unit_issue}}</td>
+                                    <td>{{hist.unit_rate}}</td>
                                     <td>{{hist.amount}}</td>
                                     <td>{{hist.bal}}</td>
                                 </tr>
@@ -73,12 +98,17 @@
                     <center>
                         {%if page_obj.has_previous %} 
                         <!--whether the previous page exists-->
-                            <a href="?page={{page_obj.previous_page_number}}">Prev</a>
+                            <a class="active" href="?page={{page_obj.previous_page_number}}">Prev</a>
+
+                        {% else %}
+                            <a>Prev</a>
                         {% endif %}
                             <span>{{page_obj.number}}</span>
             
                         {%if page_obj.has_next %}
-                            <a href="?page={{page_obj.next_page_number}}">Next</a>
+                            <a class="active" href="?page={{page_obj.next_page_number}}">Next</a>
+                        {% else %}
+                            <a>Next</a>
                         {% endif %}
                     </center>
                 </div>
@@ -89,6 +119,25 @@
     <footer>
         <Span>Forklift &copy2023</Span>
     </footer>
+
+    <div class="filter_container">
+        <form method="get" action="">
+            <input id="modalItemNameInput" type="text" name="item_name" placeholder="Item Name">
+            <input id="modalDescriptionInput" type="text" name="description" placeholder="Description">
+            <input id="modalIssueUnitInput" type="text" name="issue_unit" placeholder="Issue Unit">
+            <!-- <input id="modalRateUnitInput" min=1 type="number" name="rate_unit" placeholder="Rate of Unit"> -->
+            <input type="date" placeholder="min date" name="min_date" >
+            <input type="date" placeholder="max date" name="max_date">
+            <select name="action" id="">
+                <option selected>Choose...</option>
+                {% for acts in actions %}
+                <option value="{{acts}}">{{acts}}</option>
+                {% endfor %}
+            </select>
+            <button>submit</button>
+        </form>
+        <button id="cancelBtn" class="cancel_btn" onclick="closeFilterModal()">cancel</button>
+    </div>
 
     <!-- <div class="background_wrapper">
 

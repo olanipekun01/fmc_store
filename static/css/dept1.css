@@ -4,12 +4,68 @@
 
 header {
     padding: 20px 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-header h1 {
-    font-size: 46px;
+header .header_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+}
+
+header .header_wrapper img {
+    width: 40px;
+    height: 40px;
+}
+
+header .header_wrapper h1 {
+    font-size: 30px;
     font-weight: 900;
-    color: black;
+    color: rgb(4, 134, 70);
+    margin-left: 10px;
+}
+
+header span {
+    background-color: rgb(4, 134, 70);
+    padding: 10px 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+
+}
+
+header span.logout {
+    background-color: rgb(199, 73, 78);
+}
+
+header span:hover {
+    background-color: #ffff;
+    color: rgb(4, 134, 70);
+    border: rgb(4, 134, 70) solid 1px;
+}
+
+header span.logout:hover {
+    background-color: #ffff;
+    color: rgb(199, 73, 78);
+    border: rgb(199, 73, 78) solid 1px;
+}
+
+header span a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+header span:hover a {
+    color: rgb(4, 134, 70);
+}
+
+header span.logout:hover a {
+    color: rgb(199, 73, 78);
 }
 
 main {
@@ -51,7 +107,7 @@ section.hero {
 }
 
 section.hero .dept_nav {
-    border-bottom: 1px solid #1E2875;
+    border-bottom: 1px solid rgb(4, 134, 70);
     padding: 19px 0px 20px 0px;
 }
 
@@ -69,13 +125,13 @@ section.hero .dept_nav a {
 }
 
 section.hero .dept_nav a span.active  {
-    background-color: #1E2875;
+    background-color: rgb(4, 134, 70);
     color: white;
 }
 
 section.hero .dept_nav a span.active1  {
     border-top-left-radius: 35px;
-    background-color: #1E2875;
+    background-color: rgb(4, 134, 70);
     color: white;
 }
 
@@ -96,25 +152,30 @@ section.hero .card_wrapper .header_div h3 {
 }
 
 section.hero .card_wrapper .header_div .wrapper {
-    width: 210px;
+    width: 310px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-section.hero .card_wrapper .header_div button {
+section.hero .card_wrapper .header_div .wrapper button {
     font-size: 22px;
-    border: 1px solid #1E2875;
+    border: 1px solid rgb(4, 134, 70);
     padding: 10px 20px;
-    background: #1E2875;
+    background: rgb(4, 134, 70);
     border-radius: 15px;
     color: white;
+    cursor: pointer;
+}
+
+section.hero .card_wrapper .header_div .wrapper img {
+    cursor: pointer;
 }
 
 section.hero .card_wrapper .header_div button:hover {
     line-height: 25px;
     background: white;
-    color: #1E2875;
+    color: rgb(4, 134, 70);
 }
 
 .card_wrapper table {
@@ -167,16 +228,16 @@ section.hero .card_wrapper .header_div button:hover {
 .card_wrapper table tbody tr td button {
     padding: 5px 7px;
     border-radius: 10px;
-    border: 1px solid #1E2875;
+    border: 1px solid rgb(4, 134, 70);
     background: none;
     font-size: 16px;
     font-weight: 400;
-    color: #1E2875;
+    color: rgb(4, 134, 70);
 }
 
 .card_wrapper table tbody tr td button:hover {
     line-height: 15px;
-    background: #1E2875;
+    background: rgb(4, 134, 70);
     color: white;
 }
 
@@ -200,10 +261,18 @@ section.hero .card_wrapper .header_div button:hover {
     padding: 20px 20px;
     width: 250px;
     border-radius: 20px;
-    display: none;
+    
     position: absolute;
     top: 240px;
     left: 520px;
+}
+
+.issue_modal_container {
+    display: none;
+}
+
+.supplier_modal_container {
+    display: none;
 }
 
 
@@ -244,12 +313,12 @@ section.hero .card_wrapper .header_div button:hover {
     border: none;
     margin-bottom: 20px;
     color: white;
-    background: #1E2875;
+    background: rgb(4, 134, 70);
     
 }
 
 .modal_container form button:hover {
-    color: #1E2875;
+    color: rgb(4, 134, 70);
     background: white;
 }
 
@@ -323,12 +392,12 @@ section.hero .card_wrapper .header_div button:hover {
     border: none;
     margin-bottom: 20px;
     color: white;
-    background: #1E2875;
+    background: rgb(4, 134, 70);
 
 }
 
 .new_stock form button:hover {
-    color: #1E2875;
+    color: rgb(4, 134, 70);
     background: white;
 }
 
@@ -352,11 +421,81 @@ section.hero .card_wrapper .header_div button:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(30, 40, 117, 0.5);
+    background: rgb(4, 134, 70, 0.5);
     backdrop-filter: blur(5px);
     display: none;
 }
 
 footer {
     text-align: center;
+}
+
+.filter_container {
+    background-color: #C3C4CE;
+    padding: 20px 20px;
+    width: 250px;
+    border-radius: 20px;
+    display: none;
+    position: absolute;
+    top: 200px;
+    right: 40px;
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.filter_container form input {
+    width: 220px;
+    height: 30px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.filter_container form button {
+    font-size: 18px;
+    padding: 6px 0px;
+    width: 100%;
+    border-radius: 25px;
+    border: none;
+    margin-bottom: 20px;
+    color: white;
+    background: rgb(4, 134, 70);
+
+}
+
+.filter_container form button:hover {
+    color: #1E2875;
+    background: white;
+}
+
+.filter_container .cancel_btn {
+    font-size: 18px;
+    font-weight: 400;
+    padding: 6px 0px;
+    width: 100%;
+    border-radius: 25px;
+    border: none;
+    margin-bottom: 20px;
+
+}
+
+.filter_container .cancel_btn:hover {
+    font-weight: 700;
+    color: red;
+}
+
+.filter_container form .button_wrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter_container form .button_wrapper button {
+    width: 70px;
+    padding: 10px 0;
+    border-radius: 15px;
+
 }

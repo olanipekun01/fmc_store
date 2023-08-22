@@ -4,12 +4,68 @@
 
 header {
     padding: 20px 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-header h1 {
-    font-size: 46px;
+header .header_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+}
+
+header .header_wrapper img {
+    width: 40px;
+    height: 40px;
+}
+
+header .header_wrapper h1 {
+    font-size: 30px;
     font-weight: 900;
-    color: black;
+    color: rgb(4, 134, 70);
+    margin-left: 10px;
+}
+
+header span {
+    background-color: rgb(4, 134, 70);
+    padding: 10px 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+
+}
+
+header span.logout {
+    background-color: rgb(199, 73, 78);
+}
+
+header span:hover {
+    background-color: #ffff;
+    color: rgb(4, 134, 70);
+    border: rgb(4, 134, 70) solid 1px;
+}
+
+header span.logout:hover {
+    background-color: #ffff;
+    color: rgb(199, 73, 78);
+    border: rgb(199, 73, 78) solid 1px;
+}
+
+header span a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+header span:hover a {
+    color: rgb(4, 134, 70);
+}
+
+header span.logout:hover a {
+    color: rgb(199, 73, 78);
 }
 
 main {
@@ -21,7 +77,7 @@ main {
 
 main form {
     box-shadow: -2px 2px 4px #AAAA;
-    background-color: #1E2875;
+    background-color: rgb(4, 134, 70);
     border-radius: 35px;
     padding: 30px 40px;
     display: block;
@@ -43,7 +99,7 @@ main form input {
     width: 315px;
     height: 45px;
     border-radius: 15px;
-    border: 1px solid #1E2875;
+    border: 1px solid rgb(4, 134, 70);
     color: #AAAA;
     font-size: 17px;
     font-weight: 700;
@@ -58,13 +114,13 @@ main form button {
     padding: 10px 60px;
     border-radius: 15px;
     background-color: #FFFFFF;
-    color: #1E2875;
+    color: rgb(4, 134, 70);
     border: none;   
 }
 
 main form button:hover {
     background-color: #AAAA;
-    color: #1E2875;
+    color: rgb(4, 134, 70);
     padding: 10px 62px;
 }
 

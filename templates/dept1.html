@@ -13,11 +13,14 @@
 
 <body>
     <header>
-        <h1>Store Management App</h1>
+        <a href="{% url 'store:index' %}" class="header_wrapper">
+            <img src="{% static './assets/fmc_owo_logo.jpg' %}" alt="">
+            <h1>FMC OWO STORE</h1>
+        </a>
         {% if user.is_authenticated %}
-        <span><a href="{% url 'store:logout' %}">logout</a></span>
+        <span class="logout"><a href="{% url 'store:logout' %}">logout</a></span>
         {% else %}
-        <span><a href="{% url 'store:login' %}">login</a></span>
+        <span class="login"><a href="{% url 'store:login' %}">login</a></span>
         {% endif %}
     </header>
     <main>
@@ -36,9 +39,9 @@
 
             <div class="dept_nav">
                 <a href="/"><span class="active1">Home</span></a>
-                {% for dept in dept %}
+                <!-- {% for dept in dept %}
                 <a href="/dept/{{dept.dept_name}}"><span>{{dept.dept_name}}</span></a>
-                {% endfor %}
+                {% endfor %} -->
             </div>
 
             <div class="card_wrapper">
@@ -49,8 +52,8 @@
                     <h3>items</h3>
                     <div class="wrapper">
                         <button onclick="handleNewStock()">+ New Stock</button>
-                        <a href="/history/{{active_dept}}"><img src="{% static './assets/Calendar.svg'%}" alt=""></a>
-                    
+                        <a href="/history"><img src="{% static './assets/Calendar.svg'%}" alt=""></a>
+                        <img onclick="showFilterModal()" src="{% static './assets/filterIcon.svg' %}""" alt="">
                     </div>
                 </div>
 
@@ -61,7 +64,9 @@
                             <tr>
                                 <th>Item name</th>
                                 <th>Amount in store</th>
-                                <th></th>
+                                <th>Action</th>
+                                <th>Unit issue</th>
+                                <th>Unit rate</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -72,10 +77,19 @@
                                 
                                     
                                     <tr>
-                                        <td><a class="name" href="/history/{{active_dept}}/{{item.slug}}">{{item.item_name}}</a></td>
+                                        <td><a class="name" href="/history/{{item.slug}}">{{item.item_name}}</a></td>
                                         <td>{{item.amount}}</td>
-                                        <td><button onclick="showModal('{{item.item_name}}')">add/subtract</button></td>
-                                        <td class="remove"><a href="/delete/{{ item.slug }}"><img src="{% static './assets/deleteIcon.svg' %}" alt=""></a></td>
+                                        <td>
+                                            <button onclick="showIssueModal('{{item.item_name}}')">
+                                                issue</button> | 
+                                            <button onclick="showSupplierModal('{{item.item_name}}')">
+                                                receive</button>
+                                        </td>
+                                        <td>kg</td>
+                                        <td>150</td>
+                                        <td class="remove">
+                                            <!-- <a>edit</a> -->
+                                            <a href="/delete/{{ item.item_id }}"><img src="{% static './assets/deleteIcon.svg' %}" alt=""></a></td>
                                     </tr>
                                    
                                 
@@ -96,18 +110,43 @@
 
     </div>
 
-    <div class="modal_container">
-        <form method="post" action="/dept/{{active_dept}}">
+    <div class="modal_container issue_modal_container">
+        <form method="post" action="/dept">
             {% csrf_token %}
             <input id="modalNameInput" type="text" name="input_name" value="Paracetamol">
+            <input id="" type="text" name="input_voucher" placeholder="Voucher no">
+            <select name="input_dept_name" id="">
+                <option value="">select department</option>
+                {% for dept in department %}
+                    <option value={{dept.dept_name}}>{{dept.dept_name}}</option>
+                {% endfor %}
+            </select>
+            <input type="number" name="input_amount" placeholder="amount">
+            <select name="op_type" id="">
+                <option value="subtract">subtract</option>
+            </select>
+            <input type="text" name="input_unit_issue" value="kg" placeholder="unit issue">
+            <input type="text" name="input_unit_rate" value="150" placeholder="unit rate">
+            <button>submit</button>
+        </form>
+        <button id="cancelBtn" class="cancel_btn" onclick="closeIssueModal()">cancel</button>
+    </div>
+
+    <div class="modal_container supplier_modal_container">
+        <form method="post" action="/dept">
+            {% csrf_token %}
+            <input id="modalNameInput" type="text" name="input_name" value="Paracetamol">
+            <input id="" type="text" name="input_voucher" placeholder="Voucher no">
+            <input placeholder="supplier name" type="text" name="input_supplier_name">
             <input type="number" name="input_amount" placeholder="amount">
             <select name="op_type" id="">
                 <option value="add">add</option>
-                <option value="subtract">subtract</option>
             </select>
+            <input type="text" name="input_unit_issue" value="kg" placeholder="unit issue">
+            <input type="text" name="input_unit_rate" value="150" placeholder="unit rate">
             <button>submit</button>
         </form>
-        <button id="cancelBtn" class="cancel_btn" onclick="closeModal()">cancel</button>
+        <button id="cancelBtn" class="cancel_btn" onclick="closeSupplierModal()">cancel</button>
     </div>
 
     <div class="new_stock">
@@ -115,12 +154,28 @@
             {% csrf_token %}
             <input id="modalNameInput" type="text" name="item_name" placeholder="Item name">
             <input type="number" name="item_amount" placeholder="amount">
-            <select name="dept" id="">
+            <input id="input_unit_issue" type="text" name="input_unit_issue" placeholder="unit of isue">
+            <input id="input_unit_rate" type="number" name="input_unit_rate" placeholder="unit rate">
+            <!-- <select name="dept" id="">
                 <option value="{{active_dept}}">{{active_dept}}</option>
-            </select>
+            </select> -->
             <button>submit</button>
         </form>
         <button id="cancelNewStock" class="cancel_btn" onclick="closeNewStockModal()">cancel</button>
+    </div>
+
+    <div class="filter_container">
+        <form method="get" action="">
+            <input id="modalItemNameInput" type="text" name="item_name" placeholder="Item Name">
+            <input id="modalMinAmtInput" type="number" min=1 name="min_amnt" placeholder="Min amnt">
+            <input id="modalMaxAmtInput" type="number" min=1 name="max_amnt" placeholder="Max amnt">
+            <input id="modalIssueUnitInput" type="text" name="issue_unit" placeholder="Issue Unit">
+            <!-- <input id="modalRateUnitInput" min=1 type="number" name="rate_unit" placeholder="Rate of Unit"> -->
+            
+            
+            <button>submit</button>
+        </form>
+        <button id="cancelBtn" class="cancel_btn" onclick="closeFilterModal()">cancel</button>
     </div>
     <script src="{% static './js/dept1.js' %}"></script>
 </body>
