@@ -206,7 +206,6 @@ def history(request, item=""):
         
     history = history.order_by('-date_created')
     history = history.values()
-    
     if request.method == "POST":
         # Create the CSV file
         response = HttpResponse(content_type='text/csv')
@@ -216,7 +215,7 @@ def history(request, item=""):
         writer = csv.writer(response)
         writer.writerow(['date', 'item', 'voucher no', 'action', 'description', 'unit issue', 'unit rate', 'amount', 'balance'])
         for obj in history:
-            writer.writerow([obj.dateCreated, obj.item_name, obj.voucher_no, obj.action, obj.description, obj.unit_issue, obj.unit_rate, obj.amount, obj.bal])
+            writer.writerow([obj['dateCreated'], obj['item_name'], obj['voucher_no'], obj['action'], obj['description'], obj['unit_issue'], obj['unit_rate'], obj['amount'], obj['bal']])
 
         return response
     
