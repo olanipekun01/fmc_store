@@ -28,7 +28,7 @@ def index(request):
     history = History.objects.all()
     # dept = Department.objects.all()
     total_items = len(items)
-    out_of_stock = len(items.filter(amount__lt=11))
+    out_of_stock = len(items.filter(amount__lt=20))
     suppliers = len(history.filter(action="received"))
     issued = len(dept)
 
@@ -38,6 +38,24 @@ def index(request):
         "suppliers": suppliers,
         "issued": issued
     }
+    items = items.values()
+    if request.method == "POST":
+        # Create the CSV file
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="quaterly-report.csv"'
+
+        # Write model data to the CSV file
+        writer = csv.writer(response)
+        writer.writerow(['item', 'qty', 'issue', 'rate', 'amount'])
+        total = 0
+        for obj in items:
+            total += obj['amount'] * obj['unit_rate']
+            writer.writerow([obj['item_name'], obj['amount'], obj['unit_issue'],
+                             obj['unit_rate'], obj['amount'] * obj['unit_rate']])
+
+        writer.writerow(['Total', '', '', '', total])
+
+        return response
     return render(request, 'index.html', context)
 
 
@@ -48,7 +66,7 @@ def dept(request):
         if op_type == "add":
             input_name = request.POST['input_name']
             input_voucher = request.POST['input_voucher']
-            input_supplier_name = request.POST['input_supplier_name']
+            input_supplier_name = request.POST['input_supp_name']
             input_amount = request.POST['input_amount']
             input_unit_issue = request.POST["input_unit_issue"]
             input_unit_rate = request.POST["input_unit_rate"]
@@ -111,6 +129,7 @@ def dept(request):
 
     dept = Department.objects.all()
     items = Items.objects.all()
+    supp = Supplier.objects.all()
 
     if is_valid(item_name_input):
         items = items.filter(item_name__contains=item_name_input)
@@ -124,7 +143,7 @@ def dept(request):
     if is_valid(issue_unit):
         items = items.filter(unit_issue__icontains=issue_unit)
 
-    return render(request, 'dept1.html', {'department': dept, 'items': items})
+    return render(request, 'dept1.html', {'department': dept, 'items': items, 'supplier': supp})
 
 
 @login_required
@@ -320,8 +339,26 @@ def outOfStock(request):
 
 @login_required
 def suppliers(request):
-    history = History.objects.all()
-    supliers = history.filter(action="received")
-    arr = [sup.description for sup in supliers]
+    supp = Supplier.objects.all()
 
-    return render(request, 'base.html', {"names": arr})
+    if request.method == "POST":
+        supp_name = request.POST["supp_name"]
+
+        if supp.filter(supp_name=supp_name).exists():
+            messages.info(request, 'Supplier exist')
+            return redirect("/suppliers")
+
+        supp = supp.create(supp_name=supp_name)
+
+        supp.save()
+
+        return redirect("/suppliers")
+
+    return render(request, 'supplier.html', {"supplier": supp})
+
+
+@login_required
+def removeSupp(request, id):
+    supp = Supplier.objects.filter(supp_name=id).delete()
+
+    return redirect("/suppliers")

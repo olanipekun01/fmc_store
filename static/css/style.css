@@ -197,13 +197,24 @@ section.hero .report_container .card img {
 }
 
 section.hero .cta_container {
-    padding: 10px 210px;
+    padding: 10px 0px;
+    width: 1180px;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
 }
 
+section.hero .cta_container form {
+    width: 0%;
+    height: 0%;
+}
 
+section.hero .cta_container form button {
+    width:0%;
+    height: 0%;
+    border: none;
+    background-color: rgb(204, 240, 221);
+}
 
 section.hero .cta_container .cta_card {
     width: 185px;
@@ -227,6 +238,12 @@ section.hero .cta_container .cta_card:hover span {
     color: white;
 }
 
+section.hero .cta_container .cta_card:hover button {
+    color: white;
+}
+
+
+
 section.hero .cta_container .cta_card img {
     width: 55px;
     margin: auto;
@@ -236,6 +253,14 @@ section.hero .cta_container .cta_card span {
     display: block;
     margin-top: 20px;
     color: rgb(4, 134, 70);
+}
+
+section.hero .cta_container .cta_card  button {
+    display: block;
+    margin-top: 20px;
+    color: rgb(4, 134, 70);
+    border: none;
+    background-color: #ffff;
 }
 
 footer {

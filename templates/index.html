@@ -1,29 +1,28 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link href="{% static './css/style.css' %}" rel="stylesheet">
-</head>
+    <link href="{% static './css/style.css' %}" rel="stylesheet" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <a href="{% url 'store:index' %}" class="header_wrapper">
-            <img src="{% static './assets/fmc_owo_logo.jpg' %}" alt="">
-            <h1>FMC OWO STORE</h1>
-        </a>
-        {% if user.is_authenticated %}
-        <span class="logout"><a  href="{% url 'store:logout' %}">logout</a></span>
-        {% else %}
-        <span class="login"><a  href="{% url 'store:login' %}">login</a></span>
-        {% endif %}
+      <a href="{% url 'store:index' %}" class="header_wrapper">
+        <img src="{% static './assets/fmc_owo_logo.jpg' %}" alt="" />
+        <h1>FMC OWO STORE</h1>
+      </a>
+      {% if user.is_authenticated %}
+      <span class="logout"><a href="{% url 'store:logout' %}">logout</a></span>
+      {% else %}
+      <span class="login"><a href="{% url 'store:login' %}">login</a></span>
+      {% endif %}
     </header>
     <main>
-        <!-- <section class="side_nav">
+      <!-- <section class="side_nav">
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">dept 1</a></li>
@@ -33,71 +32,94 @@
             </ul>
         </section> -->
 
-        <section class="hero">
+      <section class="hero">
+        <div class="dept_nav">
+          <a href="/"><span class="active1">Home</span></a>
+          {% for dept in dept %}
+          <a href="/dept/{{dept.dept_name}}"><span>{{dept.dept_name}}</span></a>
+          {% endfor %}
+        </div>
 
+        <div class="report_container">
+          <a href="/dept" class="card">
+            <span class="figure">{{total_items}}</span>
+            <span class="report_name">Total Items</span>
+            <img
+              src="{% static 'assets/signal-solid.svg' %}"
+              class="report_img"
+              alt=""
+            />
+          </a>
 
-            <div class="dept_nav">
-                <a href="/"><span class="active1">Home</span></a>
-                {% for dept in dept %}
-                    <a href="/dept/{{dept.dept_name}}"><span>{{dept.dept_name}}</span></a>
-                {% endfor %}
-            </div>
+          <a href="/outofstock" class="card">
+            <span class="figure">{{out_of_stock}}</span>
+            <span class="report_name">out of stock</span>
+            <img
+              src="{% static 'assets/arrow-trend-down-solid.svg' %}"
+              class="report_img"
+              alt=""
+            />
+          </a>
 
+          <a href="/suppliers" class="card">
+            <span class="figure">{{suppliers}}</span>
+            <span class="report_name">Total Suppliers</span>
+            <img
+              src="{% static 'assets/arrow-trend-up-solid.svg' %}"
+              class="report_img"
+              alt=""
+            />
+          </a>
 
-            <div class="report_container">
-                <a href="/dept" class="card">
-                    <span class="figure">{{total_items}}</span>
-                    <span class="report_name">Total Items</span>
-                    <img src="{% static 'assets/signal-solid.svg' %}" class="report_img" alt="">
-                </a>
+          <a href="/department" class="card">
+            <span class="figure">{{issued}}</span>
+            <span class="report_name">Total Department</span>
+            <img
+              src="{% static 'assets/arrow-trend-up-solid.svg' %}"
+              class="report_img"
+              alt=""
+            />
+          </a>
+        </div>
 
-                <a href="/outofstock" class="card">
-                    <span class="figure">{{out_of_stock}}</span>
-                    <span class="report_name">out of stock</span>
-                    <img src="{% static 'assets/arrow-trend-down-solid.svg' %}" class="report_img" alt="">
-                </a>
+        <hr />
 
-                <a href="/supliers" class="card">
-                    <span class="figure">{{suppliers}}</span>
-                    <span class="report_name">Total Suppliers</span>
-                    <img src="{% static 'assets/arrow-trend-up-solid.svg' %}" class="report_img" alt="">
-                </a>
+        <div class="cta_container">
+          <a href="/dept" class="cta_card">
+            <img src="{% static 'assets/UP.png' %}" alt="" />
+            <span>Go to Inventory</span>
+          </a>
 
-                <a href="/department" class="card">
-                    <span class="figure">{{issued}}</span>
-                    <span class="report_name">Total Department</span>
-                    <img src="{% static 'assets/arrow-trend-up-solid.svg' %}" class="report_img" alt="">
-                </a>
-            </div>
+          <a href="/history" class="cta_card">
+            <img src="{% static 'assets/UP.png' %}" alt="" />
+            <span>Stock Report</span>
+          </a>
 
-            <hr>
+          <a href="/department" class="cta_card">
+            <img src="{% static 'assets/UP.png' %}" alt="" />
+            <span>Department</span>
+          </a>
 
-            <div class="cta_container">
-                <a href="/dept" class="cta_card">
-                    <img src="{% static 'assets/UP.png' %}" alt="">
-                    <span>Go to Inventory</span>
-                </a>
+          <a href="/suppliers" class="cta_card">
+            <img src="{% static 'assets/UP.png' %}" alt="" />
+            <span>Suppliers</span>
+          </a>
 
-                <a href="/history" class="cta_card">
-                    <img src="{% static 'assets/UP.png' %}" alt="">
-                    <span>Stock Report</span>
-                </a>
-
-                <a href="/department" class="cta_card">
-                    <img src="{% static 'assets/UP.png' %}" alt="">
-                    <span>Department</span>
-                </a>
-            </div>
-
-     
-        </section>
+          <form method="post" action="">
+            {% csrf_token %}
+            <button>
+              <div class="cta_card">
+                <img src="{% static 'assets/UP.png' %}" alt="" />
+                <span>quaterly_report</span>
+              </div>
+            </button>
+          </form>
+        </div>
+      </section>
     </main>
 
     <footer>
-        <Span>Forklift &copy2023</Span>
+      <span>Forklift &copy2023</span>
     </footer>
-
-    
-</body>
-
+  </body>
 </html>

@@ -80,11 +80,15 @@
                   </td>
                   <td>{{item.amount}}</td>
                   <td>
-                    <button onclick="showIssueModal('{{item.item_name}}')">
+                    <button
+                      onclick="showIssueModal('{{item.item_name}}', '{{item.unit_rate}}', '{{item.unit_issue}}')"
+                    >
                       issue
                     </button>
                     |
-                    <button onclick="showSupplierModal('{{item.item_name}}')">
+                    <button
+                      onclick="showSupplierModal('{{item.item_name}}', '{{item.unit_rate}}', '{{item.unit_issue}}')"
+                    >
                       receive
                     </button>
                   </td>
@@ -139,12 +143,14 @@
         </select>
         <input
           type="text"
+          id="modalUnitIssue"
           name="input_unit_issue"
           value="kg"
           placeholder="unit issue"
         />
         <input
           type="text"
+          id="modalUnitRate"
           name="input_unit_rate"
           value="150"
           placeholder="unit rate"
@@ -171,23 +177,26 @@
           name="input_voucher"
           placeholder="Voucher no"
         />
-        <input
-          placeholder="supplier name"
-          type="text"
-          name="input_supplier_name"
-        />
+        <select name="input_supp_name" id="">
+          <option value="">select supplier</option>
+          {% for supp in supplier %}
+          <option value="{{supp.supp_name}}">{{supp.supp_name}}</option>
+          {% endfor %}
+        </select>
         <input type="number" name="input_amount" placeholder="amount" />
         <select name="op_type" id="">
           <option value="add">add</option>
         </select>
         <input
           type="text"
+          id="modalUnitIssue"
           name="input_unit_issue"
           value="kg"
           placeholder="unit issue"
         />
         <input
           type="text"
+          id="modalUnitRate"
           name="input_unit_rate"
           value="150"
           placeholder="unit rate"

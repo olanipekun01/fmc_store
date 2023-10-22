@@ -11,6 +11,15 @@ from django.utils.text import slugify
 class Department(models.Model):
     dept_name = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.title
+    
+class Supplier(models.Model):
+    supp_name = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.title
+
 
 class History(models.Model):
     DEPT = (("MH", "microhistory"),
@@ -26,7 +35,7 @@ class History(models.Model):
     item_name = models.CharField(max_length=500)
     voucher_no = models.CharField(max_length=50, blank=True, null=True)
     description = models.CharField(max_length=500, null=True, blank=True)
-    action = models.CharField(max_length=200,blank=True,null=True)
+    action = models.CharField(max_length=200, blank=True, null=True)
     amount = models.CharField(max_length=500)
     bal = models.CharField(max_length=500, null=True, blank=True)
     unit_issue = models.CharField(max_length=200, null=True, blank=True)
@@ -35,18 +44,25 @@ class History(models.Model):
     #                          on_delete=models.SET_NULL, null=True, blank=True)
     slug = models.SlugField(max_length=2000, null=True, blank=True)
 
+    def __str__(self):
+        return self.title
+
 
 class Items(models.Model):
     item_id = models.UUIDField(
-         primary_key = True,
-         editable = False)
+        primary_key=True,
+        editable=False)
     item_name = models.CharField(max_length=500)
     amount = models.DecimalField(max_digits=15, decimal_places=1, default=0.0)
     # dept = models.ForeignKey(Department, related_name="item_category",
     #                          on_delete=models.SET_NULL, null=True, blank=True)
     unit_issue = models.CharField(max_length=200, null=True, blank=True)
-    unit_rate = models.DecimalField(max_digits=15, decimal_places=1, default=0.0)
+    unit_rate = models.DecimalField(
+        max_digits=15, decimal_places=1, default=0.0)
     slug = models.SlugField(max_length=2000, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 @receiver(pre_save, sender=Items)

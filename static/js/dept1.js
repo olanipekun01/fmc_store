@@ -1,12 +1,16 @@
 
-function showIssueModal(name) {
+function showIssueModal(name, rate, issue) {
     document.getElementById("modalNameInput").value = name;
+    document.getElementById("modalUnitRate").value = rate;
+    document.getElementById("modalUnitIssue").value = issue;
     document.querySelector(".issue_modal_container").style.display = "block";
     document.querySelector(".background_wrapper").style.display = "block";
 };
 
-function showSupplierModal(name) {
+function showSupplierModal(name, rate, issue) {
     document.getElementById("modalNameInput").value = name;
+    document.getElementById("modalUnitRate").value = rate;
+    document.getElementById("modalUnitIssue").value = issue;
     document.querySelector(".supplier_modal_container").style.display = "block";
     document.querySelector(".background_wrapper").style.display = "block";
 };
