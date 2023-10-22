@@ -1,6 +1,6 @@
 
 function showIssueModal(name, rate, issue) {
-    document.getElementById("modalNameInput").value = name;
+    // document.getElementById("modalNameInput").value = name;
     document.getElementById("modalUnitRate").value = rate;
     document.getElementById("modalUnitIssue").value = issue;
     document.querySelector(".issue_modal_container").style.display = "block";
@@ -8,7 +8,7 @@ function showIssueModal(name, rate, issue) {
 };
 
 function showSupplierModal(name, rate, issue) {
-    document.getElementById("modalNameInput").value = name;
+    // document.getElementById("modalNameInput").value = name;
     document.getElementById("modalUnitRate").value = rate;
     document.getElementById("modalUnitIssue").value = issue;
     document.querySelector(".supplier_modal_container").style.display = "block";
