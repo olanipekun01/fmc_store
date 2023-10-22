@@ -246,7 +246,7 @@ def history(request, item=""):
     page_number = request.GET.get('page')
     try:
         page_obj = p.get_page(page_number)  # returns the desired page object
-    except PageNotAnInteger:
+    except PageNotAnInteger73:
         # if page_number is not an integer then assign the first page
         page_obj = p.page(1)
     except EmptyPage:
