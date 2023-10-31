@@ -1,0 +1,269 @@
+* {
+    margin: 0;
+}
+
+header {
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .header_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+}
+
+header .header_wrapper img {
+    width: 40px;
+    height: 40px;
+}
+
+header .header_wrapper h1 {
+    font-size: 30px;
+    font-weight: 900;
+    color: rgb(4, 134, 70);
+    margin-left: 10px;
+}
+
+header span {
+    background-color: rgb(4, 134, 70);
+    padding: 10px 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+
+}
+
+header span.logout {
+    background-color: rgb(199,73,78);
+}
+
+header span:hover {
+    background-color: #ffff;
+    color: rgb(4, 134, 70);
+    border: rgb(4, 134, 70) solid 1px;
+}
+
+header span.logout:hover {
+    background-color: #ffff;
+    color: rgb(199, 73, 78);
+    border: rgb(199, 73, 78) solid 1px;
+}
+
+header span a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+header span:hover a {
+    color: rgb(4, 134, 70);
+}
+
+header span.logout:hover a {
+    color: rgb(199, 73, 78);
+}
+
+/* header h1 {
+    font-size: 46px;
+    font-weight: 900;
+    color: black;
+} */
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 25px;
+}
+
+/* section.side_nav {
+    border-right: 1px solid black;
+    border-radius: 35px;
+    width: 15%;
+    background-color: red;
+    padding: 0;
+}
+
+section.side_nav ul {
+    list-style: none;
+}
+
+section.side_nav ul li {
+    padding: 0px 0px;
+    margin-top: 35px;
+}
+
+section.side_nav ul li a {
+    color: black;
+    font-size: 26px;
+    text-decoration: none;
+} */
+
+section.hero {
+    width: 100%;
+    min-height: 460px;
+    border-radius: 35px;
+    box-shadow: -2px 2px 4px #AAAA;
+    background: rgb(204, 240, 221);
+}
+
+section.hero .dept_nav {
+    border-bottom: 1px solid rgb(4, 134, 70);
+    padding: 19px 0px 20px 0px;
+    background-color: #ffff;
+}
+
+section.hero .dept_nav a span {
+    padding: 20px 25px;
+    color: #AAAA;
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+section.hero .dept_nav a {
+    text-decoration: none;
+    color: #AAAA;
+}
+
+section.hero .dept_nav a span.active {
+    background-color: rgb(4, 134, 70);
+    color: white;
+}
+
+section.hero .dept_nav a span.active1 {
+    border-top-left-radius: 35px;
+    background-color: rgb(4, 134, 70);
+    color: white;
+}
+
+
+
+section.hero .report_container {
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 900px;
+}
+
+section.hero .report_container a.card {
+    width: 105px;
+    height: 90px;
+    border: none;
+    margin-bottom: 30px;
+    padding: 10px 8px;
+    background: #ffff;
+    cursor:pointer;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+section.hero .report_container a.card:hover {
+    background-color: rgb(4, 134, 70);
+    border-radius: 10px;
+}
+
+section.hero .report_container a.card:hover span.report_name {
+    color: black;
+}
+
+section.hero .report_container a.card span.figure {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    display: block;
+    color: rgb(128, 143, 135);
+}
+
+section.hero .report_container a.card span.report_name {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 7px;
+    display: block;
+    color: rgb(4, 134, 70);
+
+}
+
+section.hero .report_container .card img {
+    width: 35px;
+    margin: auto;
+}
+
+section.hero .cta_container {
+    padding: 10px 0px;
+    width: 1180px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+section.hero .cta_container form {
+    width: 0%;
+    height: 0%;
+}
+
+section.hero .cta_container form button {
+    width:0%;
+    height: 0%;
+    border: none;
+    background-color: rgb(204, 240, 221);
+}
+
+section.hero .cta_container .cta_card {
+    width: 185px;
+    /* height: 120px; */
+    border: none;
+    margin-bottom: 30px;
+    padding: 20px 8px;
+    background: #ffff;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 40px;
+    text-align: center;
+}
+
+section.hero .cta_container .cta_card:hover {
+    background-color: rgb(4, 134, 70);
+    border-radius: 10px;
+}
+
+section.hero .cta_container .cta_card:hover span {
+    color: white;
+}
+
+section.hero .cta_container .cta_card:hover button {
+    color: white;
+}
+
+
+
+section.hero .cta_container .cta_card img {
+    width: 55px;
+    margin: auto;
+}
+
+section.hero .cta_container .cta_card span {
+    display: block;
+    margin-top: 20px;
+    color: rgb(4, 134, 70);
+}
+
+section.hero .cta_container .cta_card  button {
+    display: block;
+    margin-top: 20px;
+    color: rgb(4, 134, 70);
+    border: none;
+    background-color: #ffff;
+}
+
+footer {
+    text-align: center;
+    color: rgb(4, 134, 70);
+}
