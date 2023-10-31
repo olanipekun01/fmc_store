@@ -26,10 +26,11 @@ def index(request):
     dept = Department.objects.all()
     items = Items.objects.all()
     history = History.objects.all()
+    supp = Supplier.objects.all()
     # dept = Department.objects.all()
     total_items = len(items)
     out_of_stock = len(items.filter(amount__lt=20))
-    suppliers = len(history.filter(action="received"))
+    suppliers = len(supp)
     issued = len(dept)
 
     context = {
