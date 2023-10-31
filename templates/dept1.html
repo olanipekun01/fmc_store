@@ -117,7 +117,7 @@
     <div class="background_wrapper"></div>
 
     <div class="modal_container issue_modal_container">
-      <form method="post" action="/dept">
+      <form method="post" action="/dept/">
         {% csrf_token %}
         <input
           id="modalNameInput"
@@ -163,7 +163,7 @@
     </div>
 
     <div class="modal_container supplier_modal_container">
-      <form method="post" action="/dept">
+      <form method="post" action="/dept/">
         {% csrf_token %}
         <input
           id="modalNameInput"
@@ -209,7 +209,7 @@
     </div>
 
     <div class="new_stock">
-      <form method="post" action="/newstock">
+      <form method="post" action="/newstock/">
         {% csrf_token %}
         <input
           id="modalNameInput"
