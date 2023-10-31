@@ -12,13 +12,14 @@ class Department(models.Model):
     dept_name = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.title
-    
+        return self.dept_name
+
+
 class Supplier(models.Model):
     supp_name = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.title
+        return self.supp_name
 
 
 class History(models.Model):
@@ -45,7 +46,7 @@ class History(models.Model):
     slug = models.SlugField(max_length=2000, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.item_name
 
 
 class Items(models.Model):
@@ -62,7 +63,7 @@ class Items(models.Model):
     slug = models.SlugField(max_length=2000, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.item_name
 
 
 @receiver(pre_save, sender=Items)
